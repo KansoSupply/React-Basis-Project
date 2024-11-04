@@ -14,14 +14,14 @@ import {
 export const RecipeItem = ({ item, clickFn }) => {
   return (
     <Card
-      w="sm"
+      w={{ base: "full", sm: "sm" }}
       h="35rem"
       onClick={() => clickFn(item)}
       cursor="pointer"
       _hover={{ transform: "scale(1.01)" }}
     >
       <CardBody>
-        <VStack spacing="16px" align="left">
+        <VStack spacing="16px" align="left" w="100%">
           <Image
             filter="grayscale(0%)"
             w="full"
@@ -80,52 +80,56 @@ export const RecipeItem = ({ item, clickFn }) => {
               </Tag>
             )}
           </HStack>
-          <VStack align="Left">
-            <Text textTransform="uppercase" fontSize="8px">
-              Cautions
-            </Text>
-            <Wrap>
-              {item.cautions.map((caution) => (
-                <Tag
-                  fontSize="8px"
-                  fontWeight="medium"
-                  size="md"
-                  width="fit-content"
-                  textTransform="uppercase"
-                  padding="2"
-                  borderRadius="0"
-                  background="lightgrey"
-                  color="black"
-                  key={caution}
-                >
-                  {caution}
-                </Tag>
-              ))}
-            </Wrap>
-          </VStack>
-          <VStack align="Left">
-            <Text textTransform="uppercase" fontSize="8px">
-              Diet Labels
-            </Text>
-            <Wrap>
-              {item.dietLabels.map((diet) => (
-                <Tag
-                  fontSize="8px"
-                  fontWeight="medium"
-                  size="md"
-                  width="fit-content"
-                  textTransform="uppercase"
-                  padding="2"
-                  borderRadius="0"
-                  background="lightgrey"
-                  color="black"
-                  key={diet}
-                >
-                  {diet}
-                </Tag>
-              ))}
-            </Wrap>
-          </VStack>
+          {item.cautions.length > 0 && (
+            <VStack align="Left">
+              <Text textTransform="uppercase" fontSize="8px">
+                Cautions
+              </Text>
+              <Wrap>
+                {item.cautions.map((caution) => (
+                  <Tag
+                    fontSize="8px"
+                    fontWeight="medium"
+                    size="md"
+                    width="fit-content"
+                    textTransform="uppercase"
+                    padding="2"
+                    borderRadius="0"
+                    background="lightgrey"
+                    color="black"
+                    key={caution}
+                  >
+                    {caution}
+                  </Tag>
+                ))}
+              </Wrap>
+            </VStack>
+          )}
+          {item.dietLabels.length > 0 && (
+            <VStack align="Left">
+              <Text textTransform="uppercase" fontSize="8px">
+                Diet Labels
+              </Text>
+              <Wrap>
+                {item.dietLabels.map((diet) => (
+                  <Tag
+                    fontSize="8px"
+                    fontWeight="medium"
+                    size="md"
+                    width="fit-content"
+                    textTransform="uppercase"
+                    padding="2"
+                    borderRadius="0"
+                    background="lightgrey"
+                    color="black"
+                    key={diet}
+                  >
+                    {diet}
+                  </Tag>
+                ))}
+              </Wrap>
+            </VStack>
+          )}
         </VStack>
       </CardBody>
     </Card>

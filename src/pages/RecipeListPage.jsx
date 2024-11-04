@@ -1,4 +1,4 @@
-import { Center, Heading, Wrap } from "@chakra-ui/react";
+import { Center, Heading, Wrap, Text } from "@chakra-ui/react";
 import { RecipeItems } from "../utils/data";
 import { RecipeItem } from "../components/RecipeItem";
 import { Search } from "../components/Search";
@@ -19,15 +19,19 @@ export const RecipeListPage = ({ clickFn }) => {
     <Center h="fit" flexDir="column" gap="1rem" padding="4rem 1rem">
       <Heading>Delicious Recipes</Heading>
       <Search changeFn={handleChange} />
-      <Wrap justify="center" spacing="16px">
-        {matchedRecipes.map((item) => (
-          <RecipeItem
-            clickFn={clickFn}
-            item={item.recipe}
-            key={item.recipe.label}
-          />
-        ))}
-      </Wrap>
+      {matchedRecipes.length === 0 ? (
+        <Text>Sorry, we did not find any recipes.</Text>
+      ) : (
+        <Wrap justify="center" spacing="16px">
+          {matchedRecipes.map((item) => (
+            <RecipeItem
+              clickFn={clickFn}
+              item={item.recipe}
+              key={item.recipe.label}
+            />
+          ))}
+        </Wrap>
+      )}
     </Center>
   );
 };

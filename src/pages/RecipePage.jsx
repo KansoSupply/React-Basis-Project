@@ -11,8 +11,13 @@ import {
   Button,
   Tag,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 
 export const RecipePage = ({ item, clickFn }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Center bgColor="white" h="fit" flexDirection="column">
@@ -51,8 +56,10 @@ export const RecipePage = ({ item, clickFn }) => {
                 <VStack align="left">
                   <Heading size="md">Ingredients</Heading>
                   <>
-                    {item.ingredients.map((ingredient) => (
-                      <Text key={ingredient.text}>{ingredient.text}</Text>
+                    {item.ingredients.map((ingredient, index) => (
+                      <Text key={`${ingredient.text}-${index}`}>
+                        {ingredient.text}
+                      </Text>
                     ))}
                   </>
                 </VStack>
@@ -79,48 +86,52 @@ export const RecipePage = ({ item, clickFn }) => {
                     ))}
                   </Wrap>
                 </VStack>
-                <VStack align="left">
-                  <Heading size="md">Diet Labels</Heading>
-                  <Wrap mt="6" spacing="3">
-                    {item.dietLabels.map((dietLabel) => (
-                      <Tag
-                        fontSize="8px"
-                        fontWeight="bold"
-                        size="md"
-                        width="fit-content"
-                        textTransform="uppercase"
-                        padding="2"
-                        borderRadius="0"
-                        background="lightgrey"
-                        color="black"
-                        key={dietLabel}
-                      >
-                        {dietLabel}
-                      </Tag>
-                    ))}
-                  </Wrap>
-                </VStack>
-                <VStack align="left">
-                  <Heading size="md">Cautions</Heading>
-                  <Wrap mt="6" spacing="3">
-                    {item.cautions.map((caution) => (
-                      <Tag
-                        fontSize="8px"
-                        fontWeight="bold"
-                        size="md"
-                        width="fit-content"
-                        textTransform="uppercase"
-                        padding="2"
-                        borderRadius="0"
-                        background="lightgrey"
-                        color="black"
-                        key={caution}
-                      >
-                        {caution}
-                      </Tag>
-                    ))}
-                  </Wrap>
-                </VStack>
+                {item.dietLabels.length > 0 && (
+                  <VStack align="left">
+                    <Heading size="md">Diet Labels</Heading>
+                    <Wrap mt="6" spacing="3">
+                      {item.dietLabels.map((dietLabel) => (
+                        <Tag
+                          fontSize="8px"
+                          fontWeight="bold"
+                          size="md"
+                          width="fit-content"
+                          textTransform="uppercase"
+                          padding="2"
+                          borderRadius="0"
+                          background="lightgrey"
+                          color="black"
+                          key={dietLabel}
+                        >
+                          {dietLabel}
+                        </Tag>
+                      ))}
+                    </Wrap>
+                  </VStack>
+                )}
+                {item.cautions.length > 0 && (
+                  <VStack align="left">
+                    <Heading size="md">Cautions</Heading>
+                    <Wrap mt="6" spacing="3">
+                      {item.cautions.map((caution) => (
+                        <Tag
+                          fontSize="8px"
+                          fontWeight="bold"
+                          size="md"
+                          width="fit-content"
+                          textTransform="uppercase"
+                          padding="2"
+                          borderRadius="0"
+                          background="lightgrey"
+                          color="black"
+                          key={caution}
+                        >
+                          {caution}
+                        </Tag>
+                      ))}
+                    </Wrap>
+                  </VStack>
+                )}
                 <VStack align="left">
                   <Heading size="md">Total Nutrients</Heading>
                   <VStack align="left" spacing="3">
